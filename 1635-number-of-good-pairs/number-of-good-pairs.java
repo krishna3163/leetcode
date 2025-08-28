@@ -1,20 +1,18 @@
+
 class Solution {
-    public int numIdenticalPairs(int[] nums) {
-        int res = 0;
-        Map<Integer, Integer> freq = new HashMap<>();
-        for(int n : nums){
-            if(freq.containsKey(n)){
-                res += freq.get(n);
-                freq.put(n, freq.get(n)+1);
+   public int numIdenticalPairs(int[] nums) {
+        int i=0,j=0,c=0;     
+        for(i=0;i<nums.length;i++){
+            for(j=i+1;j<nums.length;j++){
+                if(nums[i]==nums[j])
+                    c++;;
             }
-            else
-                freq.put(n, 1);
         }
-        return res;   
+        return c;
     }
 }
-/*         Method 3
-----------------------------
-  Time Complexity: O(n)
-  Space Complexity: O(n)
----------------------------*/
+/*    Brute Force (Method 1)
+-----------------------------
+  Time Complexity: O(n^2)
+  Space Complexity: O(1)
+----------------------------*/
