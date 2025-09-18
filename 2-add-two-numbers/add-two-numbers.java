@@ -1,27 +1,55 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+/**
+ * Definition for singly-linked list.
+ */
+
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode dummyHead = new ListNode(0);
-        ListNode tail = dummyHead;
+        // Dummy node to simplify result list creation
+        ListNode dummy = new ListNode(0);
+        ListNode ans = dummy;
         int carry = 0;
 
+        // Loop until both lists and carry are processed
         while (l1 != null || l2 != null || carry != 0) {
-            int digit1 = (l1 != null) ? l1.val : 0;
-            int digit2 = (l2 != null) ? l2.val : 0;
 
-            int sum = digit1 + digit2 + carry;
-            int digit = sum % 10;
+            // Using ternary operator:
+            // condition ? value_if_true : value_if_false
+            // If l1 is not null → take l1.val, else use 0
+            int x = (l1 != null) ? l1.val : 0;
+
+            // If l2 is not null → take l2.val, else use 0
+            int y = (l2 != null) ? l2.val : 0;
+
+            // Calculate sum of values + carry
+            int sum = carry + x + y;
+
+            // Update carry for next digit
             carry = sum / 10;
 
-            ListNode newNode = new ListNode(digit);
-            tail.next = newNode;
-            tail = tail.next;
+            // Create a new node with the current digit
+            ans.next = new ListNode(sum % 10);
 
-            l1 = (l1 != null) ? l1.next : null;
-            l2 = (l2 != null) ? l2.next : null;
+            // Move result pointer forward
+            ans = ans.next;
+
+            // Move to next nodes in l1 and l2 if available
+            if (l1 != null)
+                l1 = l1.next;
+            if (l2 != null)
+                l2 = l2.next;
         }
 
-        ListNode result = dummyHead.next;
-        dummyHead.next = null;
-        return result;
+        // Return the head of the new list (skip dummy node)
+        return dummy.next;
     }
 }
