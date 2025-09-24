@@ -1,20 +1,13 @@
 class Solution {
     public boolean isGoodArray(int[] nums) {
-        int g = nums[0];
-        for(int i =0 ; i<nums.length; i++){
-            g = gcd(g, nums[i]);
-                if(g== 1) return true;
-            
-           
+        int  x = nums[0] , y;
+        for(int a : nums){
+            while (a > 0){
+                y = x % a ;
+                x = a;
+                a = y;
+            }
         }
-         return g == 1;
-    }
-    private int gcd(int a , int b){
-        while(b != 0){
-            int temp = b;
-            b = a%b;
-            a = temp;
-        }
-        return a;
+        return x == 1;
     }
 }
